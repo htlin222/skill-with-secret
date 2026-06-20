@@ -78,11 +78,12 @@ This is the right shape for the agent era: a credential that is *minted*, *self-
 
 ## Try it live
 
-A public, no-login demo runs the exact same Worker with `DEMO_MODE=1`, which
+### → **[stash-demo.hsieh-ting-lin.workers.dev](https://stash-demo.hsieh-ting-lin.workers.dev)**
+
+A public, no-login demo running the exact same Worker with `DEMO_MODE=1`, which
 swaps Cloudflare Access for a throwaway per-browser identity. Open it, download a
 real `.skill`, and rotate it to watch the old one get revoked — no account
-needed. CI auto-deploys it on every push to `main`
-(`.github/workflows/deploy-demo.yml`).
+needed.
 
 Stand up your own in one command (`wrangler login` first):
 
@@ -90,8 +91,8 @@ Stand up your own in one command (`wrangler login` first):
 pnpm setup:demo     # creates D1 + KV, sets the secret, deploys — prints the URL
 ```
 
-> **Live demo:** `https://stash-demo.<your-subdomain>.workers.dev` — details in
-> [`docs/DEMO.md`](docs/DEMO.md).
+CI can also auto-deploy on every push to `main`
+(`.github/workflows/deploy-demo.yml`). Details in [`docs/DEMO.md`](docs/DEMO.md).
 
 It's a sandbox: throwaway secret, disposable KV, ephemeral identities. The real
 paradigm keeps Access in front (see Quickstart).

@@ -16,12 +16,12 @@ CF_ACCESS_AUD = "demo"
 
 [[kv_namespaces]]
 binding = "STASH_KV"
-id = "<your-demo-kv-namespace-id>"
+id = "054319eafae54f718f676c226c913c6a"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "stash-demo-db"
-database_id = "<your-demo-d1-database-id>"
+database_id = "368055c4-5e4d-4b59-9d96-4206e6d0e443"
 
 # STASH_KEY_SECRET is still a Worker secret (throwaway is fine for the demo).
 # Set it once against the demo worker:
