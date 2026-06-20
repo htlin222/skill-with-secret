@@ -1,7 +1,9 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
+import type { Context, Next } from 'hono';
 import { accessMiddleware } from './lib/access';
+import { demoMiddleware } from './lib/demo';
 import { resourceRoutes } from './routes/resource';
 import { mintRoutes } from './routes/mint';
 import { CONSOLE_HTML } from './console';
@@ -38,9 +40,14 @@ app.get('/api/health', (c) => c.json({ ok: true, ts: Date.now() }));
 // alone. This path must be in your CF Access *Bypass* policy.
 app.route('/api/kv', resourceRoutes);
 
-// ---- Everything below requires Cloudflare Access ---------------------------
-app.use('/api/me/*', accessMiddleware);
-app.use('/', accessMiddleware); // the demo console page
+// ---- Everything below requires identity ------------------------------------
+// Real instance: Cloudflare Access. Demo instance (DEMO_MODE=1): ephemeral
+// cookie identity, no login. Chosen per-request so env is available.
+const gate = (c: Context<AppContext>, next: Next) =>
+  c.env.DEMO_MODE === '1' ? demoMiddleware(c, next) : accessMiddleware(c, next);
+
+app.use('/api/me/*', gate);
+app.use('/', gate); // the demo console page
 
 // The minter: download / view / rotate your own key (verified identity).
 app.route('/api/me', mintRoutes);

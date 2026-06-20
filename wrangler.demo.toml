@@ -1,0 +1,28 @@
+# Committed config for the PUBLIC DEMO deploy (CI uses this via --config).
+# Unlike the real wrangler.toml (gitignored), the demo instance is throwaway,
+# so its binding ids and DEMO_MODE flag live in git. Fill the two ids once
+# (see docs/DEMO.md), then GitHub Actions deploys on every push to main.
+name = "stash-demo"
+main = "worker/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+# DEMO_MODE bypasses Cloudflare Access with an ephemeral cookie identity.
+# NEVER set this on the real instance — it disables the auth that is the point.
+DEMO_MODE = "1"
+# Unused in demo mode (Access is bypassed), but the bindings expect them.
+CF_ACCESS_TEAM_DOMAIN = "demo"
+CF_ACCESS_AUD = "demo"
+
+[[kv_namespaces]]
+binding = "STASH_KV"
+id = "<your-demo-kv-namespace-id>"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "stash-demo-db"
+database_id = "<your-demo-d1-database-id>"
+
+# STASH_KEY_SECRET is still a Worker secret (throwaway is fine for the demo).
+# Set it once against the demo worker:
+#   pnpm exec wrangler secret put STASH_KEY_SECRET --config wrangler.demo.toml

@@ -44,7 +44,7 @@ function jwtFromRequest(c: Context<AppContext>): string | null {
   return null;
 }
 
-async function upsertUser(db: D1Database, email: string) {
+export async function upsertUser(db: D1Database, email: string) {
   const now = Date.now();
   await db
     .prepare(

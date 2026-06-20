@@ -11,6 +11,8 @@ export interface Env {
   CF_ACCESS_TEAM_DOMAIN: string;
   /** Cloudflare Access application AUD (audience) tag. */
   CF_ACCESS_AUD: string;
+  /** "1" → public demo mode: bypass Access with an ephemeral cookie identity. */
+  DEMO_MODE?: string;
 }
 
 export type AppContext = {

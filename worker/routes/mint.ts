@@ -35,7 +35,7 @@ async function currentKey(c: Context<AppContext>) {
 mintRoutes.get('/key', async (c) => {
   const k = await currentKey(c);
   if (!k) return c.json({ error: 'stash api not configured' }, 503);
-  return c.json(k);
+  return c.json({ ...k, demo: c.env.DEMO_MODE === '1' });
 });
 
 // POST /api/me/key/rotate — bump the version salt. Any previously downloaded

@@ -31,7 +31,13 @@ export const CONSOLE_HTML = /* html */ `<!doctype html>
 </head>
 <body>
 <h1>skill-with-secret</h1>
-<p class="muted">You're signed in via Cloudflare Access. Everything below is scoped to your verified email — no key is ever typed in by hand.</p>
+<div class="card" id="demobanner" style="display:none; border-color:#d97706; background:color-mix(in srgb,#d97706 10%,transparent)">
+  <strong>🧪 Public demo mode</strong> — no login; you've been given a throwaway
+  identity for this browser. Minted skills only talk to this sandbox, and the
+  data here is disposable. This is the paradigm running live; the real deploy
+  sits behind Cloudflare Access.
+</div>
+<p class="muted" id="realnote">You're signed in via Cloudflare Access. Everything below is scoped to your verified email — no key is ever typed in by hand.</p>
 
 <div class="card">
   <strong>Your minted skill</strong>
@@ -70,6 +76,7 @@ async function loadKey() {
   $('ver').textContent = j.version;
   $('key').textContent = j.key.slice(0, 14) + '…' + j.key.slice(-6);
   $('dl').href = '/api/me/skill';
+  if (j.demo) { $('demobanner').style.display = ''; $('realnote').style.display = 'none'; }
 }
 
 function api(method, path, body) {

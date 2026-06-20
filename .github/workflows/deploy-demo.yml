@@ -1,0 +1,43 @@
+name: deploy-demo
+
+# Deploys the PUBLIC demo Worker (wrangler.demo.toml, DEMO_MODE=1) on every
+# push to main. One-time setup — see docs/DEMO.md:
+#   - create the demo KV + D1, put their ids in wrangler.demo.toml
+#   - `wrangler secret put STASH_KEY_SECRET --config wrangler.demo.toml`
+#   - add repo secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Snapshot skill/ into the Worker (it has no filesystem at runtime).
+      - run: node scripts/gen-bundle.mjs
+
+      # Apply D1 schema to the demo database (idempotent).
+      - run: pnpm exec wrangler d1 migrations apply stash-demo-db --remote --config wrangler.demo.toml
+
+      - run: pnpm exec wrangler deploy --config wrangler.demo.toml

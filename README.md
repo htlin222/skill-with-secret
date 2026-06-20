@@ -72,6 +72,20 @@ key = "stashk_" + base64url( HMAC-SHA256( SERVER_SECRET, `${email}:${version}` )
 
 This is the right shape for the agent era: a credential that is *minted*, *self-installing*, *attributable*, and *individually revocable* — with the auth boundary kept at the edge (Cloudflare Access), not reimplemented in your app.
 
+## Try it live
+
+A public, no-login demo runs the exact same Worker with `DEMO_MODE=1`, which
+swaps Cloudflare Access for a throwaway per-browser identity. Open it, download a
+real `.skill`, and rotate it to watch the old one get revoked — no account
+needed. CI auto-deploys it on every push to `main`
+(`.github/workflows/deploy-demo.yml`).
+
+> **Live demo:** `https://stash-demo.<your-subdomain>.workers.dev` — set up in
+> [`docs/DEMO.md`](docs/DEMO.md).
+
+It's a sandbox: throwaway secret, disposable KV, ephemeral identities. The real
+paradigm keeps Access in front (see Quickstart).
+
 ## Quickstart
 
 ```bash
