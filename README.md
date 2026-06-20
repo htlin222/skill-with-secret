@@ -100,8 +100,8 @@ pnpm db:migrate:remote
 pnpm deploy
 ```
 
-Then put the minting routes behind Cloudflare Access (one command with
-[`cf-gate`](https://github.com/) or the dashboard), open the console at your
+Then put the minting routes behind Cloudflare Access (via the Zero Trust
+dashboard, or any CLI that drives the Access API), open the console at your
 Worker's URL, and click **Download stash.skill**. Full walkthrough:
 [`docs/SETUP.md`](docs/SETUP.md).
 

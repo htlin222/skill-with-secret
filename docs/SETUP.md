@@ -52,7 +52,8 @@ hand skills to. Two paths:
 
 - **Dashboard:** Zero Trust → Access → Applications → Add → Self-hosted →
   set the domain to your Worker URL → policy: *Allow* the emails / domain.
-- **CLI:** if you use the `cf-gate` skill: `cf-gate gate <your-worker-host> you@example.com`
+- **API/CLI:** any tool that drives the Cloudflare Access API works too (the
+  Access app + an allow-email policy are two API calls).
 
 Then grab the application's **AUD tag** and your **team domain**
 (`your-team.cloudflareaccess.com`) and put both into `[vars]` in
