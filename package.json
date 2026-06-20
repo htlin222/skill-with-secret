@@ -1,0 +1,27 @@
+{
+  "name": "skill-with-secret",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mint per-user, revocable Claude skills from a Cloudflare Worker — the secret bakes itself in at download time.",
+  "type": "module",
+  "scripts": {
+    "gen": "node scripts/gen-bundle.mjs",
+    "dev": "node scripts/gen-bundle.mjs && wrangler dev",
+    "predeploy": "node scripts/gen-bundle.mjs",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "db:migrate:local": "wrangler d1 migrations apply stash-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply stash-db --remote",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2",
+    "hono": "^4.6.0",
+    "jose": "^5.9.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250501.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.0.0"
+  }
+}

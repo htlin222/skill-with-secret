@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+.dev.vars
+wrangler.toml
+.env
+skill/.env
+worker/generated/
+*.skill
+.DS_Store

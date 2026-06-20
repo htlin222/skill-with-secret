@@ -1,0 +1,29 @@
+# Copy to `wrangler.toml` and fill in the ids from `docs/SETUP.md`.
+name = "stash"
+main = "worker/index.ts"
+compatibility_date = "2025-01-01"
+
+# Non-secret config. The TEAM_DOMAIN/AUD identify your Cloudflare Access app
+# (used only to verify the minting routes). Set TEAM_DOMAIN to "localhost" in
+# .dev.vars for local dev to enable the X-Dev-Email bypass.
+[vars]
+CF_ACCESS_TEAM_DOMAIN = "your-team.cloudflareaccess.com"
+CF_ACCESS_AUD = "your-access-application-aud-tag"
+
+# The example protected resource.
+[[kv_namespaces]]
+binding = "STASH_KV"
+id = "<your-kv-namespace-id>"
+
+# The allowlist + key_version salt.
+[[d1_databases]]
+binding = "DB"
+database_name = "stash-db"
+database_id = "<your-d1-database-id>"
+
+# STASH_KEY_SECRET is a *secret*, not a [vars] entry. Set it with:
+#   wrangler secret put STASH_KEY_SECRET
+# (generate one with: openssl rand -hex 32)
+#
+# D1 schema migrations live in ./migrations and are applied with
+#   wrangler d1 migrations apply stash-db --remote
