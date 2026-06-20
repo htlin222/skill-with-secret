@@ -84,7 +84,13 @@ real `.skill`, and rotate it to watch the old one get revoked — no account
 needed. CI auto-deploys it on every push to `main`
 (`.github/workflows/deploy-demo.yml`).
 
-> **Live demo:** `https://stash-demo.<your-subdomain>.workers.dev` — set up in
+Stand up your own in one command (`wrangler login` first):
+
+```bash
+pnpm setup:demo     # creates D1 + KV, sets the secret, deploys — prints the URL
+```
+
+> **Live demo:** `https://stash-demo.<your-subdomain>.workers.dev` — details in
 > [`docs/DEMO.md`](docs/DEMO.md).
 
 It's a sandbox: throwaway secret, disposable KV, ephemeral identities. The real

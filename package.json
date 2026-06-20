@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "gen": "node scripts/gen-bundle.mjs",
+    "setup:demo": "bash scripts/setup-demo.sh",
     "dev": "node scripts/gen-bundle.mjs && wrangler dev",
     "predeploy": "node scripts/gen-bundle.mjs",
     "deploy": "wrangler deploy",
