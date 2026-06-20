@@ -38,6 +38,10 @@ def call(cfg: dict, method: str, path: str, body: bytes | None = None):
     req = urllib.request.Request(url, data=body, method=method)
     req.add_header("Authorization", "Bearer " + cfg["API_KEY"])
     req.add_header("X-User-Email", cfg["USER_EMAIL"])
+    # An explicit UA is required: Cloudflare's edge blocks the default
+    # "Python-urllib/x.y" agent with a 403 (error 1010) before the request
+    # ever reaches the Worker.
+    req.add_header("User-Agent", "stash-skill/1.0 (+https://github.com/htlin222/skill-with-secret)")
     if body is not None:
         req.add_header("Content-Type", "text/plain")
     try:

@@ -6,6 +6,10 @@
 
 > **Mint per-user, revocable Claude skills from your own Cloudflare Worker — the secret bakes itself into the skill at download time.**
 
+![A minted skill in action: its baked-in credential works, then a one-click revoke instantly 401s the already-downloaded copy](docs/demo.gif)
+
+<sub>Live, against [stash-demo.hsieh-ting-lin.workers.dev](https://stash-demo.hsieh-ting-lin.workers.dev): the credential is baked in (never typed), the CLI just works, then revoking it server-side kills the already-downloaded skill on the spot.</sub>
+
 A tiny, self-contained reference implementation of a paradigm: instead of
 pasting an API key into every agent and every machine, your **server mints a
 personalized [Agent Skill](https://docs.claude.com/en/docs/claude-code/skills)
