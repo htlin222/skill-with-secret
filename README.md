@@ -1,5 +1,9 @@
 # skill-with-secret
 
+[![ci](https://github.com/htlin222/skill-with-secret/actions/workflows/ci.yml/badge.svg)](https://github.com/htlin222/skill-with-secret/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
+
 > **Mint per-user, revocable Claude skills from your own Cloudflare Worker — the secret bakes itself into the skill at download time.**
 
 A tiny, self-contained reference implementation of a paradigm: instead of

@@ -10,6 +10,7 @@
     "predeploy": "node scripts/gen-bundle.mjs",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
+    "test": "node --test 'worker/**/*.test.ts'",
     "db:migrate:local": "wrangler d1 migrations apply stash-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply stash-db --remote",
     "tail": "wrangler tail"
