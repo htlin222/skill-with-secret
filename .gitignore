@@ -7,3 +7,4 @@ skill/.env
 worker/generated/
 *.skill
 .DS_Store
+.dev.vars.tpl
